@@ -1,0 +1,68 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\code\\Chess\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|c:\\code\\chess\\chess.logic\\gameboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|solutionrelative:chess.logic\\gameboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8DCE43A8-4CDB-453B-A73D-F410C9F14144}|Chess.Tests\\Chess.Tests.csproj|c:\\code\\chess\\chess.tests\\boardtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DCE43A8-4CDB-453B-A73D-F410C9F14144}|Chess.Tests\\Chess.Tests.csproj|solutionrelative:chess.tests\\boardtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BoardTests.cs",
+              "DocumentMoniker": "C:\\code\\Chess\\Chess.Tests\\BoardTests.cs",
+              "RelativeDocumentMoniker": "Chess.Tests\\BoardTests.cs",
+              "ToolTip": "C:\\code\\Chess\\Chess.Tests\\BoardTests.cs",
+              "RelativeToolTip": "Chess.Tests\\BoardTests.cs",
+              "ViewState": "AQIAALcAAAAAAAAAAAAmwNAAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T01:12:44.797Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GameBoard.cs",
+              "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\GameBoard.cs",
+              "RelativeDocumentMoniker": "Chess.Logic\\GameBoard.cs",
+              "ToolTip": "C:\\code\\Chess\\Chess.Logic\\GameBoard.cs",
+              "RelativeToolTip": "Chess.Logic\\GameBoard.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-16T00:17:05.438Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
