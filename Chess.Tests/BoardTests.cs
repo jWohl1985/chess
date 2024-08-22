@@ -69,13 +69,15 @@ public class BoardTests
         Rook? blackRook2 = board.State[7, 7] as Rook;
 
         // Assert
-        if (whiteRook1 is null || whiteRook2 is null || blackRook1 is null || blackRook2 is null)
-            Assert.Fail();
+        whiteRook1.Should().NotBeNull();
+        whiteRook2.Should().NotBeNull();
+        blackRook1.Should().NotBeNull();
+        blackRook2.Should().NotBeNull();
 
-        whiteRook1.Color.Should().Be(PieceColor.White);
-        whiteRook2.Color.Should().Be(PieceColor.White);
-        blackRook1.Color.Should().Be(PieceColor.Black);
-        blackRook2.Color.Should().Be(PieceColor.Black);
+        whiteRook1!.Color.Should().Be(PieceColor.White);
+        whiteRook2!.Color.Should().Be(PieceColor.White);
+        blackRook1!.Color.Should().Be(PieceColor.Black);
+        blackRook2!.Color.Should().Be(PieceColor.Black);
 
         whiteRook1.Rank.Should().Be(0);
         whiteRook2.Rank.Should().Be(0);
@@ -104,13 +106,15 @@ public class BoardTests
         Knight? blackKnight2 = board.State[7, 6] as Knight;
 
         // Assert
-        if (whiteKnight1 is null || whiteKnight2 is null || blackKnight1 is null || blackKnight2 is null)
-            Assert.Fail();
+        whiteKnight1.Should().NotBeNull();
+        whiteKnight2.Should().NotBeNull();
+        blackKnight1.Should().NotBeNull();
+        blackKnight2.Should().NotBeNull();
 
-        whiteKnight1.Color.Should().Be(PieceColor.White);
-        whiteKnight2.Color.Should().Be(PieceColor.White);
-        blackKnight1.Color.Should().Be(PieceColor.Black);
-        blackKnight2.Color.Should().Be(PieceColor.Black);
+        whiteKnight1!.Color.Should().Be(PieceColor.White);
+        whiteKnight2!.Color.Should().Be(PieceColor.White);
+        blackKnight1!.Color.Should().Be(PieceColor.Black);
+        blackKnight2!.Color.Should().Be(PieceColor.Black);
 
         whiteKnight1.Rank.Should().Be(0);
         whiteKnight2.Rank.Should().Be(0);
@@ -139,13 +143,15 @@ public class BoardTests
         Bishop? blackBishop2 = board.State[7, 5] as Bishop;
 
         // Assert
-        if (whiteBishop1 is null || whiteBishop2 is null || blackBishop1 is null || blackBishop2 is null)
-            Assert.Fail();
+        whiteBishop1.Should().NotBeNull();
+        whiteBishop2.Should().NotBeNull();
+        blackBishop1.Should().NotBeNull();
+        blackBishop2.Should().NotBeNull();
 
-        whiteBishop1.Color.Should().Be(PieceColor.White);
-        whiteBishop2.Color.Should().Be(PieceColor.White);
-        blackBishop1.Color.Should().Be(PieceColor.Black);
-        blackBishop2.Color.Should().Be(PieceColor.Black);
+        whiteBishop1!.Color.Should().Be(PieceColor.White);
+        whiteBishop2!.Color.Should().Be(PieceColor.White);
+        blackBishop1!.Color.Should().Be(PieceColor.Black);
+        blackBishop2!.Color.Should().Be(PieceColor.Black);
 
         whiteBishop1.Rank.Should().Be(0);
         whiteBishop2.Rank.Should().Be(0);
@@ -171,11 +177,11 @@ public class BoardTests
         Queen? blackQueen = board.State[7, 3] as Queen;
 
         // Assert
-        if (whiteQueen is null || blackQueen is null)
-            Assert.Fail();
+        whiteQueen.Should().NotBeNull();
+        blackQueen.Should().NotBeNull();
 
-        whiteQueen.Color.Should().Be(PieceColor.White);
-        blackQueen.Color.Should().Be(PieceColor.Black);
+        whiteQueen!.Color.Should().Be(PieceColor.White);
+        blackQueen!.Color.Should().Be(PieceColor.Black);
 
         whiteQueen.Rank.Should().Be(0);
         blackQueen.Rank.Should().Be(7);
@@ -197,11 +203,11 @@ public class BoardTests
         King? blackKing = board.State[7, 4] as King;
 
         // Assert
-        if (whiteKing is null || blackKing is null)
-            Assert.Fail();
+        whiteKing.Should().NotBeNull();
+        blackKing.Should().NotBeNull();
 
-        whiteKing.Color.Should().Be(PieceColor.White);
-        blackKing.Color.Should().Be(PieceColor.Black);
+        whiteKing!.Color.Should().Be(PieceColor.White);
+        blackKing!.Color.Should().Be(PieceColor.Black);
 
         whiteKing.Rank.Should().Be(0);
         blackKing.Rank.Should().Be(7);
@@ -216,7 +222,46 @@ public class BoardTests
         // Arrange
         GameBoard board = new GameBoard();
 
+        // Act
+        board.SetupGame();
+
         // Assert
         board.TurnColor.Should().Be(PieceColor.White);
+    }
+
+    [Fact]
+    public void Board_Should_Have_Middle_Four_Ranks_Empty()
+    {
+        // Arrange
+        GameBoard board = new GameBoard();
+
+        // Act
+        board.SetupGame();
+
+        // Assert
+        for(int i = 2; i <=5; i++)
+        {
+            for (int j = 0; j <= 7; j++)
+            {
+                board.State[i, j].Should().BeNull();
+            }
+        }
+    }
+
+    [Fact]
+    public void Board_Should_Be_Clear_After_Clear_Board_Method()
+    {
+        // Arrange
+        GameBoard board = new GameBoard();
+        board.SetupGame();
+
+        // Act
+        board.ClearBoard();
+
+        // Assert
+        foreach (Piece? piece in board.State)
+        {
+            piece.Should().BeNull();
+        }
     }
 }

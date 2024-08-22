@@ -8,31 +8,32 @@ namespace Chess.Logic;
 
 public abstract class Piece
 {
-    // White or black
     public required PieceColor Color { get; init; }
 
-    // The board the piece is on
     public required GameBoard Board { get; init; }
 
-    // the row on the board the piece is in, 0-8
-    public int Rank => GetMyRank();
+    public int Rank => GetRank();
 
-    // the column on the board the piece is in, 0-8
-    public int File => GetMyFile();
+    public int File => GetFile();
 
-    // returns whether or not the piece can move to the square at [rank,file] on Board
-    public virtual bool CanMove(int rank, int file)
+
+    public abstract bool CanMove(int rank, int file);
+
+    protected bool IsValidMove(int newRank, int newFile)
     {
-        // return false if rank or file is < 0 or > 7
-        // return false if the square is already occupied by a piece the same color
+        if (newRank < 0 || newRank > 7 || newFile < 0 || newFile > 7) // moving off the board
+            return false;
 
-        // override this and implement the rest of the logic for the specific piece in that piece's class after calling base.CanMove();
+        if (newRank == Rank && newFile == File) // trying to 'move' to the same square
+            return false;
 
-        // just put this here so it compiles, delete
-        return false;
+        if (Board.State[newRank, newFile] is Piece piece && piece.Color == Color) // trying to move onto friendly piece
+            return false;
+
+        return true;
     }
 
-    private int GetMyRank()
+    private int GetRank()
     {
         for (int i = 0; i <= 7; i++)
         {
@@ -43,10 +44,11 @@ public abstract class Piece
             }
         }
 
-        throw new Exception();
+        // if we got this far something is wrong
+        throw new Exception("Piece is not on the board!");
     }
 
-    private int GetMyFile()
+    private int GetFile()
     {
         for (int i = 0; i <= 7; i++)
         {
@@ -57,6 +59,7 @@ public abstract class Piece
             }
         }
 
-        throw new Exception();
+        // if we got this far something is wrong
+        throw new Exception("Piece is not on the board!");
     }
 }

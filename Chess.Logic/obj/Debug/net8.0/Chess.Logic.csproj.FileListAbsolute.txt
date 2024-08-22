@@ -9,3 +9,4 @@ C:\code\Chess\Chess.Logic\obj\Debug\net8.0\Chess.Logic.dll
 C:\code\Chess\Chess.Logic\obj\Debug\net8.0\refint\Chess.Logic.dll
 C:\code\Chess\Chess.Logic\obj\Debug\net8.0\Chess.Logic.pdb
 C:\code\Chess\Chess.Logic\obj\Debug\net8.0\ref\Chess.Logic.dll
+C:\code\Chess\Chess.Logic\obj\Debug\net8.0\Chess.Logic.sourcelink.json
