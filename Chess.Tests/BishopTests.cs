@@ -1,5 +1,6 @@
 ﻿using Chess.Logic;
 using FluentAssertions;
+using static Chess.Logic.GameBoard;
 
 namespace Chess.Tests;
 
@@ -20,7 +21,7 @@ public class BishopTests
     public void Should_Not_Be_Able_To_Move_Off_Board()
     {
         // Arrange
-        _board.State[3, 3] = _whiteBishop;
+        _board.State[RANK_4, FILE_D] = _whiteBishop;
 
         // Act
         bool canMoveTooFarUpRight = _whiteBishop.CanMove(_whiteBishop.CurrentRank + 5, _whiteBishop.CurrentFile + 5);
@@ -39,27 +40,30 @@ public class BishopTests
     public void Should_Only_Move_Diagonally()
     {
         // Arrange
-        _board.State[3, 3] = _whiteBishop;
+        _board.State[RANK_4, FILE_D] = _whiteBishop;
+        List<(int, int)> validMoves = new()
+        {
+            (RANK_1, FILE_A), (RANK_2, FILE_B), (RANK_3, FILE_C), // down-left
+            (RANK_5, FILE_C), (RANK_6, FILE_B), (RANK_7, FILE_A), // up-left
+            (RANK_5, FILE_E), (RANK_6, FILE_F), (RANK_7, FILE_G), (RANK_8, FILE_H), // up-right
+            (RANK_3, FILE_E), (RANK_2, FILE_F), (RANK_1, FILE_G) // down-right
+        };
 
         // Act
-        for (int i = 0; i <= 7; i++)
+        for (int i = RANK_1; i <= RANK_8; i++)
         {
-            for (int j = 0; j <= 7; j++)
+            for (int j = FILE_A; j <= FILE_H; j++)
             {
                 bool canMoveToSquare = _whiteBishop.CanMove(i, j);
 
-                if (Math.Abs(i - _whiteBishop.CurrentRank) != Math.Abs(j - _whiteBishop.CurrentRank))
+                // Assert
+                if (validMoves.Contains((i, j)))
                 {
-                        // Assert
-                        canMoveToSquare.Should().BeFalse();
+                    canMoveToSquare.Should().BeTrue();
                 }
                 else
                 {
-                    // Assert
-                    if (i != _whiteBishop.CurrentRank && j != _whiteBishop.CurrentFile)
-                    {
-                        canMoveToSquare.Should().BeTrue();
-                    }
+                    canMoveToSquare.Should().BeFalse();
                 }
             }
         }
@@ -69,10 +73,10 @@ public class BishopTests
     public void Should_Not_Move_To_The_Same_Square()
     {
         // Arrange
-        _board.State[3, 3] = _whiteBishop;
+        _board.State[RANK_4, FILE_D] = _whiteBishop;
 
         // Act
-        bool canMoveToSameSquare = _whiteBishop.CanMove(3, 3);
+        bool canMoveToSameSquare = _whiteBishop.CanMove(RANK_4, FILE_D);
 
         // Assert
         canMoveToSameSquare.Should().BeFalse();
@@ -82,15 +86,15 @@ public class BishopTests
     public void Should_Not_Move_Onto_Friendly_Pieces()
     {
         // Arrange
-        _board.State[3, 3] = _whiteBishop;
-        _board.State[4, 4] = new Queen() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_4, FILE_D] = _whiteBishop;
+        _board.State[RANK_5, FILE_E] = new Queen() { Board = _board, Color = PieceColor.White };
 
-        _board.State[6, 6] = _blackBishop;
-        _board.State[7, 7] = new Queen() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_7, FILE_F] = _blackBishop;
+        _board.State[RANK_8, FILE_H] = new Queen() { Board = _board, Color = PieceColor.Black };
 
         // Act
-        bool whiteCanMoveOntoOwnPiece = _whiteBishop.CanMove(4, 4);
-        bool blackCanMoveOntoOwnPiece = _blackBishop.CanMove(7, 7);
+        bool whiteCanMoveOntoOwnPiece = _whiteBishop.CanMove(RANK_5, FILE_E);
+        bool blackCanMoveOntoOwnPiece = _blackBishop.CanMove(RANK_8, FILE_H);
 
         // Assert
         whiteCanMoveOntoOwnPiece.Should().BeFalse();
@@ -101,15 +105,15 @@ public class BishopTests
     public void Should_Not_Move_Through_Friendly_Pieces()
     {
         // Arrange
-        _board.State[3, 3] = _whiteBishop;
-        _board.State[5, 5] = new Bishop() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_4, FILE_D] = _whiteBishop;
+        _board.State[RANK_6, FILE_F] = new Bishop() { Board = _board, Color = PieceColor.White };
 
-        _board.State[0, 0] = _blackBishop;
-        _board.State[1, 1] = new Bishop() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_1, FILE_A] = _blackBishop;
+        _board.State[RANK_2, FILE_B] = new Bishop() { Board = _board, Color = PieceColor.Black };
 
         // Act
-        bool whiteCanMoveThroughOwnPiece = _whiteBishop.CanMove(7, 7);
-        bool blackCanMoveThroughOwnPiece = _blackBishop.CanMove(2, 2);
+        bool whiteCanMoveThroughOwnPiece = _whiteBishop.CanMove(RANK_8, FILE_H);
+        bool blackCanMoveThroughOwnPiece = _blackBishop.CanMove(RANK_3, FILE_C);
 
         // Assert
         whiteCanMoveThroughOwnPiece.Should().BeFalse();
@@ -120,15 +124,15 @@ public class BishopTests
     public void Should_Capture_Enemy_Pieces()
     {
         // Arrange
-        _board.State[3, 3] = _whiteBishop;
-        _board.State[1, 1] = new Knight() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_4, FILE_D] = _whiteBishop;
+        _board.State[RANK_2, FILE_B] = new Knight() { Board = _board, Color = PieceColor.Black };
 
-        _board.State[4, 4] = _blackBishop;
-        _board.State[6, 6] = new Knight() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_5, FILE_E] = _blackBishop;
+        _board.State[RANK_7, FILE_G] = new Knight() { Board = _board, Color = PieceColor.White };
 
         // Assert
-        bool whiteCanCaptureEnemyPiece = _whiteBishop.CanMove(1, 1);
-        bool blackCanCaptureEnemyPiece = _blackBishop.CanMove(6, 6);
+        bool whiteCanCaptureEnemyPiece = _whiteBishop.CanMove(RANK_2, FILE_B);
+        bool blackCanCaptureEnemyPiece = _blackBishop.CanMove(RANK_7, FILE_G);
 
         // Assert
         whiteCanCaptureEnemyPiece.Should().BeTrue();
@@ -139,18 +143,37 @@ public class BishopTests
     public void Should_Not_Move_Through_Enemy_Pieces()
     {
         // Arrange
-        _board.State[3, 3] = _whiteBishop;
-        _board.State[4, 4] = new Bishop() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_4, FILE_D] = _whiteBishop;
+        _board.State[RANK_5, FILE_E] = new Bishop() { Board = _board, Color = PieceColor.Black };
 
-        _board.State[0, 0] = _blackBishop;
-        _board.State[1, 1] = new Bishop() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_1, FILE_A] = _blackBishop;
+        _board.State[RANK_2, FILE_B] = new Bishop() { Board = _board, Color = PieceColor.White };
 
         // Act
-        bool whiteCanMoveThroughEnemyPiece = _whiteBishop.CanMove(5, 5);
-        bool blackCanMoveThroughEnemyPiece = _blackBishop.CanMove(2, 2);
+        bool whiteCanMoveThroughEnemyPiece = _whiteBishop.CanMove(RANK_6, FILE_F);
+        bool blackCanMoveThroughEnemyPiece = _blackBishop.CanMove(RANK_3, FILE_C);
 
         // Assert
         whiteCanMoveThroughEnemyPiece.Should().BeFalse();
         blackCanMoveThroughEnemyPiece.Should().BeFalse();
+    }
+
+    [Fact]
+    public void Should_Not_Move_If_King_Would_Be_In_Check()
+    {
+        // Arrange
+        // the kings are already on e1 and e8 when the board is newed
+        _board.State[RANK_4, FILE_E] = _whiteBishop;
+        _board.State[RANK_5, FILE_E] = new Rook() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_6, FILE_E] = new Rook() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_7, FILE_E] = _blackBishop;
+
+        // Act
+        bool whiteCanPutOwnKingInCheck = _whiteBishop.CanMove(RANK_5, FILE_F);
+        bool blackCanPutOwnKingInCheck = _blackBishop.CanMove(RANK_6, FILE_F);
+
+        // Assert
+        whiteCanPutOwnKingInCheck.Should().BeFalse();
+        blackCanPutOwnKingInCheck.Should().BeFalse();
     }
 }
