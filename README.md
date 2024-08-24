@@ -6,14 +6,13 @@ Hot to do:
 --Add en passant capture\
 --Add pawn promotion\
 --Add checkmate detection\
---Add stalemate detection\
---Replace magic numbers with named constants, e.g. RANK_6 or FILE_C instead of 5 and 2\\
+--Add stalemate detection  
 
 Eventually to do:  
 
 --Add draw by threefold repetition\
 --Add draw by 50 move rule\
---Add draw by agreement\\
+--Add draw by agreement  
 
 Maybe to do:  
 
