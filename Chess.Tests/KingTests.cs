@@ -16,6 +16,7 @@ public class KingTests
         _board = new GameBoard();
         _whiteKing = _board.WhiteKing;
         _blackKing = _board.BlackKing;
+        _board.ClearBoard();
     }
 
     [Fact]
@@ -56,11 +57,11 @@ public class KingTests
             {
                 bool canMoveToSquare = _whiteKing.CanMove(i, j);
 
-                if (Math.Abs(i - _whiteKing.Rank) == 0 && Math.Abs(j - _whiteKing.Rank) == 0)
+                if (Math.Abs(i - _whiteKing.CurrentRank) == 0 && Math.Abs(j - _whiteKing.CurrentRank) == 0)
                 {
                     canMoveToSquare.Should().BeFalse(); // 'moving' to the same square
                 }
-                else if (Math.Abs(i - _whiteKing.Rank) <= 1 && Math.Abs(j - _whiteKing.File) <= 1)
+                else if (Math.Abs(i - _whiteKing.CurrentRank) <= 1 && Math.Abs(j - _whiteKing.CurrentFile) <= 1)
                 {
                     canMoveToSquare.Should().BeTrue(); // moving 1 square in any direction
                 }

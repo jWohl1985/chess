@@ -2,59 +2,72 @@
 
 public class Bishop : Piece
 {
-    public override bool CanMove(int rank, int file)
+    public override bool CanMove(int newRank, int newFile)
     {
-        if (!IsValidMove(rank, file))
+        if (!IsMoveValidForAnyPieceType(newRank, newFile))
             return false;
 
-        if (Math.Abs(rank - Rank) != Math.Abs(file - File)) // trying to move not diagonally
+        if (!IsMovingDiagonally(newRank, newFile))
             return false;
 
-        if (rank > Rank && file > File) // moving up-right
-        {
-            for (int i = Rank + 1; i < rank; i++)
-            {
-                for (int j = File + 1; j < file; j++)
-                {
-                    if (Board.State[i, j] is not null)
-                        return false;
-                }
-            }
-        }
-        else if (rank > Rank && file < File) // moving up-left
-        {
-            for (int i = Rank + 1; i < rank; i++)
-            {
-                for (int j = File - 1; j > File; j--)
-                {
-                    if (Board.State[i, j] is not null)
-                        return false;
-                }
-            }
-        }
-        else if (rank < Rank && file > File) // moving down-right
-        {
-            for (int i = Rank -1; i > rank; i--)
-            {
-                for (int j = File + 1; j < file; j++)
-                {
-                    if (Board.State[i, j] is not null)
-                        return false;
-                }
-            }
-        }
-        else if (rank < Rank && file < File) // moving down-left
-        {
-            for (int i = Rank -1; i > rank; i--)
-            {
-                for (int j = File - 1; j > file; j--)
-                {
-                    if (Board.State[i, j] is not null)
-                        return false;
-                }
-            }
-        }
+        if (IsAnotherPieceInTheWay(newRank, newFile))
+            return false;
 
         return true;
+    }
+
+    private bool IsMovingDiagonally(int newRank, int newFile)
+    {
+        return Math.Abs(newRank - CurrentRank) == Math.Abs(newFile - CurrentFile);
+    }
+
+    private bool IsAnotherPieceInTheWay(int newRank, int newFile)
+    {
+        if (newRank > CurrentRank && newFile > CurrentFile) // moving up-right
+        {
+            for (int i = CurrentRank + 1; i < newRank; i++)
+            {
+                for (int j = CurrentFile + 1; j < newFile; j++)
+                {
+                    if (Board.State[i, j] is not null)
+                        return true;
+                }
+            }
+        }
+        else if (newRank > CurrentRank && newFile < CurrentFile) // moving up-left
+        {
+            for (int i = CurrentRank + 1; i < newRank; i++)
+            {
+                for (int j = CurrentFile - 1; j > CurrentFile; j--)
+                {
+                    if (Board.State[i, j] is not null)
+                        return true;
+                }
+            }
+        }
+        else if (newRank < CurrentRank && newFile > CurrentFile) // moving down-right
+        {
+            for (int i = CurrentRank - 1; i > newRank; i--)
+            {
+                for (int j = CurrentFile + 1; j < newFile; j++)
+                {
+                    if (Board.State[i, j] is not null)
+                        return true;
+                }
+            }
+        }
+        else if (newRank < CurrentRank && newFile < CurrentFile) // moving down-left
+        {
+            for (int i = CurrentRank - 1; i > newRank; i--)
+            {
+                for (int j = CurrentFile - 1; j > newFile; j--)
+                {
+                    if (Board.State[i, j] is not null)
+                        return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

@@ -23,10 +23,10 @@ public class KnightTests
         _board.State[7, 7] = _whiteKnight;
 
         // Act
-        bool canMoveTooFarUpRight = _whiteKnight.CanMove(_whiteKnight.Rank + 1, _whiteKnight.File - 2);
-        bool canMoveTooFarDownRight = _whiteKnight.CanMove(_whiteKnight.Rank + 1, _whiteKnight.File + 2);
-        bool canMoveTooFarDownLeft = _whiteKnight.CanMove(_whiteKnight.Rank - 1, _whiteKnight.File + 2);
-        bool canMoveTooFarUpLeft = _whiteKnight.CanMove(_whiteKnight.Rank + 2, _whiteKnight.File - 1);
+        bool canMoveTooFarUpRight = _whiteKnight.CanMove(_whiteKnight.CurrentRank + 1, _whiteKnight.CurrentFile - 2);
+        bool canMoveTooFarDownRight = _whiteKnight.CanMove(_whiteKnight.CurrentRank + 1, _whiteKnight.CurrentFile + 2);
+        bool canMoveTooFarDownLeft = _whiteKnight.CanMove(_whiteKnight.CurrentRank - 1, _whiteKnight.CurrentFile + 2);
+        bool canMoveTooFarUpLeft = _whiteKnight.CanMove(_whiteKnight.CurrentRank + 2, _whiteKnight.CurrentFile - 1);
 
         // Assert
         canMoveTooFarUpRight.Should().BeFalse();

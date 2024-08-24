@@ -1,98 +1,109 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Chess.Logic;
+﻿namespace Chess.Logic;
 
 public class Queen : Piece
 {
-    public override bool CanMove(int rank, int file)
+    public override bool CanMove(int newRank, int newFile)
     {
-        if (!IsValidMove(rank, file))
+        if (!IsMoveValidForAnyPieceType(newRank, newFile))
             return false;
 
-        if (rank != Rank && File != file && (Math.Abs(rank - Rank) != Math.Abs(file - File))) // not moaving straight or diagonal
+        if (!IsMovingLikeAQueen(newRank, newFile))
             return false;
 
-        if (rank == Rank && file < File) // moving left
-        {
-            for (int i = File - 1; i > file; i--)
-            {
-                if (Board.State[Rank, i] is not null)
-                    return false;
-            }
-        }
-        else if (rank == Rank && file > File) // moving right
-        {
-            for (int i = File + 1; i < file; i++)
-            {
-                if (Board.State[Rank, i] is not null)
-                    return false;
-            }
-        }
-        else if (file == File && rank < Rank) // moving down
-        {
-            for (int i = Rank - 1; i > rank; i--)
-            {
-                if (Board.State[i, File] is not null)
-                    return false;
-            }
-        }
-        else if (file == File && rank > Rank) // moving up
-        {
-            for (int i = Rank + 1; i < rank; i++)
-            {
-                if (Board.State[i, File] is not null)
-                    return false;
-            }
-        }
-        else if (rank > Rank && file > File) // moving up right
-        {
-            for (int i = Rank + 1; i < rank; i++)
-            {
-                for (int j = File + 1; j < file; j++)
-                {
-                    if (Board.State[i, j] is not null)
-                        return false;
-                }
-            }
-        }
-        else if (rank > Rank && file < File) // moving up left
-        {
-            for (int i = Rank + 1; i < rank; i++)
-            {
-                for (int j = File - 1; j > file; j--)
-                {
-                    if (Board.State[i, j] is not null)
-                        return false;
-                }
-            }
-        }
-        else if (rank < Rank && file > File) // moving down right
-        {
-            for (int i = Rank - 1; i > rank; i--)
-            {
-                for (int j = File + 1; j < file; j++)
-                {
-                    if (Board.State[i, j] is not null)
-                        return false;
-                }
-            }
-        }
-        else if (rank < Rank && file < File) // moving down left
-        {
-            for (int i = Rank - 1; i > rank; i--)
-            {
-                for (int j = File - 1; j > file; j--)
-                {
-                    if (Board.State[i, j] is not null)
-                        return false;
-                }
-            }
-        }
+        if (IsAnotherPieceInTheWay(newRank, newFile))
+            return false;
 
         return true;
+    }
+
+    private bool IsMovingLikeAQueen(int newRank, int newFile)
+    {
+        bool isMovingHorizontal = newRank == CurrentRank;
+        bool isMovingVertical = newFile == CurrentFile;
+        bool isMovingDiagonal = Math.Abs(newRank - CurrentRank) == Math.Abs(newFile - CurrentFile);
+
+        return isMovingHorizontal || isMovingVertical || isMovingDiagonal;
+    }
+
+    private bool IsAnotherPieceInTheWay(int newRank, int newFile)
+    {
+        if (newRank == CurrentRank && newFile < CurrentFile) // moving left
+        {
+            for (int i = CurrentFile - 1; i > newFile; i--)
+            {
+                if (Board.State[CurrentRank, i] is not null)
+                    return true;
+            }
+        }
+        else if (newRank == CurrentRank && newFile > CurrentFile) // moving right
+        {
+            for (int i = CurrentFile + 1; i < newFile; i++)
+            {
+                if (Board.State[CurrentRank, i] is not null)
+                    return true;
+            }
+        }
+        else if (newFile == CurrentFile && newRank < CurrentRank) // moving down
+        {
+            for (int i = CurrentRank - 1; i > newRank; i--)
+            {
+                if (Board.State[i, CurrentFile] is not null)
+                    return true;
+            }
+        }
+        else if (newFile == CurrentFile && newRank > CurrentRank) // moving up
+        {
+            for (int i = CurrentRank + 1; i < newRank; i++)
+            {
+                if (Board.State[i, CurrentFile] is not null)
+                    return true;
+            }
+        }
+        else if (newRank > CurrentRank && newFile > CurrentFile) // moving up right
+        {
+            for (int i = CurrentRank + 1; i < newRank; i++)
+            {
+                for (int j = CurrentFile + 1; j < newFile; j++)
+                {
+                    if (Board.State[i, j] is not null)
+                        return true;
+                }
+            }
+        }
+        else if (newRank > CurrentRank && newFile < CurrentFile) // moving up left
+        {
+            for (int i = CurrentRank + 1; i < newRank; i++)
+            {
+                for (int j = CurrentFile - 1; j > newFile; j--)
+                {
+                    if (Board.State[i, j] is not null)
+                        return true;
+                }
+            }
+        }
+        else if (newRank < CurrentRank && newFile > CurrentFile) // moving down right
+        {
+            for (int i = CurrentRank - 1; i > newRank; i--)
+            {
+                for (int j = CurrentFile + 1; j < newFile; j++)
+                {
+                    if (Board.State[i, j] is not null)
+                        return true;
+                }
+            }
+        }
+        else if (newRank < CurrentRank && newFile < CurrentFile) // moving down left
+        {
+            for (int i = CurrentRank - 1; i > newRank; i--)
+            {
+                for (int j = CurrentFile - 1; j > newFile; j--)
+                {
+                    if (Board.State[i, j] is not null)
+                        return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

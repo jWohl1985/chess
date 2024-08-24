@@ -23,10 +23,10 @@ public class RookTests
         _board.State[3, 3] = _whiteRook;
 
         // Act
-        bool canMoveTooFarLeft = _whiteRook.CanMove(_whiteRook.Rank, _whiteRook.File - 4);
-        bool canMoveTooFarRight = _whiteRook.CanMove(_whiteRook.Rank, _whiteRook.File + 5);
-        bool canMoveTooFarDown = _whiteRook.CanMove(_whiteRook.Rank - 4, _whiteRook.File);
-        bool canMoveTooFarUp = _whiteRook.CanMove(_whiteRook.Rank + 5, _whiteRook.File);
+        bool canMoveTooFarLeft = _whiteRook.CanMove(_whiteRook.CurrentRank, _whiteRook.CurrentFile - 4);
+        bool canMoveTooFarRight = _whiteRook.CanMove(_whiteRook.CurrentRank, _whiteRook.CurrentFile + 5);
+        bool canMoveTooFarDown = _whiteRook.CanMove(_whiteRook.CurrentRank - 4, _whiteRook.CurrentFile);
+        bool canMoveTooFarUp = _whiteRook.CanMove(_whiteRook.CurrentRank + 5, _whiteRook.CurrentFile);
 
         // Assert
         canMoveTooFarLeft.Should().BeFalse();
@@ -48,10 +48,10 @@ public class RookTests
             {
                 bool canMoveToSquare = _whiteRook.CanMove(i, j);
 
-                if (i != _whiteRook.Rank && j != _whiteRook.File)
+                if (i != _whiteRook.CurrentRank && j != _whiteRook.CurrentFile)
                 {
 
-                    if (i != _whiteRook.Rank && j != _whiteRook.File)
+                    if (i != _whiteRook.CurrentRank && j != _whiteRook.CurrentFile)
                     {
                         // Assert
                         canMoveToSquare.Should().BeFalse();
@@ -60,7 +60,7 @@ public class RookTests
                 else
                 {
                     // Assert
-                    if (i != _whiteRook.Rank && j != _whiteRook.File)
+                    if (i != _whiteRook.CurrentRank && j != _whiteRook.CurrentFile)
                     {
                         canMoveToSquare.Should().BeTrue();
                     }

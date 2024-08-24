@@ -67,16 +67,16 @@ public class PawnTests
                 bool whitePawnCanMove = _whitePawn.CanMove(i, j);
                 bool blackPawnCanMove = _blackPawn.CanMove(i, j);
 
-                if (i == _whitePawn.Rank && j == _whitePawn.File)
+                if (i == _whitePawn.CurrentRank && j == _whitePawn.CurrentFile)
                     whitePawnCanMove.Should().BeFalse();
-                else if (i == _whitePawn.Rank + 1 && j == _whitePawn.File)
+                else if (i == _whitePawn.CurrentRank + 1 && j == _whitePawn.CurrentFile)
                     whitePawnCanMove.Should().BeTrue();
                 else
                     whitePawnCanMove.Should().BeFalse();
 
-                if (i == _blackPawn.Rank && j == _blackPawn.File)
+                if (i == _blackPawn.CurrentRank && j == _blackPawn.CurrentFile)
                     blackPawnCanMove.Should().BeFalse();
-                else if (i == _blackPawn.Rank - 1 && j == _blackPawn.File)
+                else if (i == _blackPawn.CurrentRank - 1 && j == _blackPawn.CurrentFile)
                     blackPawnCanMove.Should().BeTrue();
                 else
                     blackPawnCanMove.Should().BeFalse();

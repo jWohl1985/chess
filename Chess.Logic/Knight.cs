@@ -1,22 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Chess.Logic;
+﻿namespace Chess.Logic;
 
 public class Knight : Piece
 {
-    public override bool CanMove(int rank, int file)
+    public override bool CanMove(int newRank, int newFile)
     {
-        if (!IsValidMove(rank, file))
+        if (!IsMoveValidForAnyPieceType(newRank, newFile))
             return false;
 
-        if (Math.Abs(rank - Rank) == 2 && Math.Abs(file - File) == 1)
+        if (!IsMovingLikeAKnight(newRank, newFile))
+            return false;
+
+        return true;
+    }
+
+    private bool IsMovingLikeAKnight(int newRank, int newFile)
+    {
+        if (Math.Abs(newRank - CurrentRank) == 2 && Math.Abs(newFile - CurrentFile) == 1)
             return true;
 
-        if (Math.Abs(rank - Rank) == 1 && Math.Abs(file - File) == 2)
+        if (Math.Abs(newRank - CurrentRank) == 1 && Math.Abs(newFile - CurrentFile) == 2)
             return true;
 
         return false;

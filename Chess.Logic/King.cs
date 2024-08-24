@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using static Chess.Logic.GameBoard;
 
 namespace Chess.Logic;
 
@@ -10,23 +6,14 @@ public class King : Piece
 {
     public bool IsInCheck => IsBeingAttackedByEnemyPiece();
 
-    private PieceColor oppositeColor => Color == PieceColor.White ? PieceColor.Black : PieceColor.White;
-
-    public override bool CanMove(int rank, int file)
+    public override bool CanMove(int newRank, int newFile)
     {
-        if (!IsValidMove(rank, file))
+        if (!IsMoveValidForAnyPieceType(newRank, newFile))
         {
             return false;
         }
 
-        if (Math.Abs(rank - Rank) <=1 && Math.Abs(file - File) <= 1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return Math.Abs(newRank - CurrentRank) <= 1 && Math.Abs(newFile - CurrentFile) <= 1;
     }
 
     private bool IsBeingAttackedByEnemyPiece()
@@ -48,21 +35,21 @@ public class King : Piece
 
     private bool IsAttackedByPawn()
     {
-        if (Rank < 7 && Color == PieceColor.White)
+        if (CurrentRank < RANK_7 && Color == PieceColor.White)
         {
-            if (File > 0 && Board.State[Rank + 1, File - 1] is Pawn pawn1 && pawn1.Color == oppositeColor)
+            if (CurrentFile > FILE_A && Board.State[CurrentRank + 1, CurrentFile - 1] is Pawn pawn1 && pawn1.Color == PieceColor.Black)
                 return true;
 
-            if (File < 7 && Board.State[Rank + 1, File + 1] is Pawn pawn2 && pawn2.Color == oppositeColor)
+            if (CurrentFile < FILE_H && Board.State[CurrentRank + 1, CurrentFile + 1] is Pawn pawn2 && pawn2.Color == PieceColor.Black)
                 return true;
         }
 
-        if (Rank > 0 && Color == PieceColor.Black)
+        if (CurrentRank > RANK_2 && Color == PieceColor.Black)
         {
-            if (File > 0 && Board.State[Rank - 1, File - 1] is Pawn pawn1 && pawn1.Color == oppositeColor)
+            if (CurrentFile > FILE_A && Board.State[CurrentRank - 1, CurrentFile - 1] is Pawn pawn1 && pawn1.Color == PieceColor.White)
                 return true;
 
-            if (File < 7 && Board.State[Rank - 1, File + 1] is Pawn pawn2 && pawn2.Color == oppositeColor)
+            if (CurrentFile < FILE_H && Board.State[CurrentRank - 1, CurrentFile + 1] is Pawn pawn2 && pawn2.Color == PieceColor.White)
                 return true;
         }
 
@@ -71,34 +58,34 @@ public class King : Piece
 
     private bool IsAttackedByKnight()
     {
-        if (Rank < 6)
+        if (CurrentRank < RANK_7) // check two ranks up for knights
         {
-            if (File > 0 && Board.State[Rank + 2, File - 1] is Knight knight1 && knight1.Color == oppositeColor)
+            if (CurrentFile > FILE_A && Board.State[CurrentRank + 2, CurrentFile - 1] is Knight knight1 && knight1.Color != Color)
                 return true;
 
-            else if (File < 7 && Board.State[Rank + 2, File + 1] is Knight knight2 && knight2.Color == oppositeColor)
+            else if (CurrentFile < FILE_H && Board.State[CurrentRank + 2, CurrentFile + 1] is Knight knight2 && knight2.Color != Color)
                 return true;
         }
-        if (Rank > 1)
+        if (CurrentRank > RANK_2) // check two ranks down for knights
         {
-            if (File > 0 && Board.State[Rank - 2, File - 1] is Knight knight1 && knight1.Color == oppositeColor)
+            if (CurrentFile > FILE_A && Board.State[CurrentRank - 2, CurrentFile - 1] is Knight knight1 && knight1.Color != Color)
                 return true;
-            else if (File < 7 && Board.State[Rank - 2, File + 1] is Knight knight2 && knight2.Color == oppositeColor)
+            else if (CurrentFile < FILE_H && Board.State[CurrentRank - 2, CurrentFile + 1] is Knight knight2 && knight2.Color != Color)
                 return true;
         }
-        if (Rank < 7)
+        if (CurrentRank < RANK_8) // check one rank up for knights
         {
-            if (File > 1 && Board.State[Rank + 1, File - 2] is Knight knight1 && knight1.Color == oppositeColor)
+            if (CurrentFile > FILE_B && Board.State[CurrentRank + 1, CurrentFile - 2] is Knight knight1 && knight1.Color != Color)
                 return true;
 
-            if (File < 6 && Board.State[Rank + 1, File + 2] is Knight knight2 && knight2.Color == oppositeColor)
+            if (CurrentFile < FILE_G && Board.State[CurrentRank + 1, CurrentFile + 2] is Knight knight2 && knight2.Color != Color)
                 return true;
         }
-        if (Rank > 0)
+        if (CurrentRank > RANK_1) // check one rank down for knights
         {
-            if (File > 1 && Board.State[Rank - 1, File - 2] is Knight knight1 && knight1.Color == oppositeColor)
+            if (CurrentFile > FILE_B && Board.State[CurrentRank - 1, CurrentFile - 2] is Knight knight1 && knight1.Color != Color)
                 return true;
-            if (File < 6 && Board.State[Rank - 1, File + 2] is Knight knight2 && knight2.Color == oppositeColor)
+            if (CurrentFile < FILE_G && Board.State[CurrentRank - 1, CurrentFile + 2] is Knight knight2 && knight2.Color != Color)
                 return true;
         }
 
@@ -108,67 +95,66 @@ public class King : Piece
     private bool IsAttackedDiagonallyByBishopOrQueen()
     {
         // Check up and to the right
-        for (int i = 1; Rank + i <= 7 && File + i <= 7; i++)
+        for (int i = 1; CurrentRank + i <= RANK_8 && CurrentFile + i <= FILE_H; i++)
         {
-
-            if (Board.State[Rank + i, File + i] is null)
+            if (Board.State[CurrentRank + i, CurrentFile + i] is null)
                 continue;
 
-            else if (Board.State[Rank + i, File + i] is Queen queen && queen.Color == oppositeColor)
+            else if (Board.State[CurrentRank + i, CurrentFile + i] is Queen queen && queen.Color != Color)
                 return true;
 
-            else if (Board.State[Rank + i, File + i] is Bishop bishop && bishop.Color == oppositeColor)
+            else if (Board.State[CurrentRank + i, CurrentFile + i] is Bishop bishop && bishop.Color != Color)
                 return true;
 
-            else
+            else // we found a different piece that wouldn't be attacking us
                 break;
         }
 
         // Check up and to the left
-        for (int i = 1; Rank + i <= 7 && File - i >= 0; i++)
+        for (int i = 1; CurrentRank + i <= RANK_8 && CurrentFile - i >= FILE_A; i++)
         {
-            if (Board.State[Rank + i, File - i] is null)
+            if (Board.State[CurrentRank + i, CurrentFile - i] is null)
                 continue;
 
-            else if (Board.State[Rank + i, File - i] is Queen queen && queen.Color == oppositeColor)
+            else if (Board.State[CurrentRank + i, CurrentFile - i] is Queen queen && queen.Color != Color)
                 return true;
 
-            else if (Board.State[Rank + i, File - i] is Bishop bishop && bishop.Color == oppositeColor)
+            else if (Board.State[CurrentRank + i, CurrentFile - i] is Bishop bishop && bishop.Color != Color)
                 return true;
 
-            else
+            else // we found a different piece that wouldn't be attacking us
                 break;
         }
 
         // Check down and to the right
-        for (int i = 1; Rank - i >= 0 && File + i <= 7; i++)
+        for (int i = 1; CurrentRank - i >= RANK_1 && CurrentFile + i <= FILE_H; i++)
         {
-            if (Board.State[Rank - i, File + i] is null)
+            if (Board.State[CurrentRank - i, CurrentFile + i] is null)
                 continue;
 
-            else if (Board.State[Rank - i, File + i] is Queen queen && queen.Color == oppositeColor)
+            else if (Board.State[CurrentRank - i, CurrentFile + i] is Queen queen && queen.Color != Color)
                 return true;
 
-            else if (Board.State[Rank - i, File + i] is Bishop bishop && bishop.Color == oppositeColor)
+            else if (Board.State[CurrentRank - i, CurrentFile + i] is Bishop bishop && bishop.Color != Color)
                 return true;
 
-            else
+            else // we found a different piece that wouldn't be attacking us
                 break;
         }
 
         // Check down and to the left
-        for (int i = 1; Rank - i >= 0 && File - i >= 0; i++)
+        for (int i = 1; CurrentRank - i >= RANK_1 && CurrentFile - i >= FILE_A; i++)
         {
-            if (Board.State[Rank - i, File - i] is null)
+            if (Board.State[CurrentRank - i, CurrentFile - i] is null)
                 continue;
 
-            else if (Board.State[Rank - i, File - i] is Queen queen && queen.Color == oppositeColor)
+            else if (Board.State[CurrentRank - i, CurrentFile - i] is Queen queen && queen.Color != Color)
                 return true;
 
-            else if (Board.State[Rank - i, File - i] is Bishop bishop && bishop.Color == oppositeColor)
+            else if (Board.State[CurrentRank - i, CurrentFile - i] is Bishop bishop && bishop.Color != Color)
                 return true;
 
-            else
+            else // we found a different piece that wouldn't be attacking us
                 break;
         }
 
@@ -178,34 +164,34 @@ public class King : Piece
     private bool IsAttackedHorizontallyByRookOrQueen()
     {
         // Check to the right
-        for (int i = File + 1; i <= 7; i++)
+        for (int i = CurrentFile + 1; i <= FILE_H; i++)
         {
-            if (Board.State[Rank, i] is null)
+            if (Board.State[CurrentRank, i] is null)
                 continue;
 
-            else if (Board.State[Rank, i] is Queen queen && queen.Color == oppositeColor)
+            else if (Board.State[CurrentRank, i] is Queen queen && queen.Color != Color)
                 return true;
 
-            else if (Board.State[Rank, i] is Rook rook && rook.Color == oppositeColor)
+            else if (Board.State[CurrentRank, i] is Rook rook && rook.Color != Color)
                 return true;
 
-            else
+            else // we found a different piece that wouldn't be attacking us
                 break;
         }
 
         // Check to the left
-        for (int i = File - 1; i >= 0; i--)
+        for (int i = CurrentFile - 1; i >= FILE_A; i--)
         {
-            if (Board.State[Rank, i] is null)
+            if (Board.State[CurrentRank, i] is null)
                 continue;
 
-            else if (Board.State[Rank, i] is Queen queen && queen.Color == oppositeColor)
+            else if (Board.State[CurrentRank, i] is Queen queen && queen.Color != Color)
                 return true;
 
-            else if (Board.State[Rank, i] is Rook rook && rook.Color == oppositeColor)
+            else if (Board.State[CurrentRank, i] is Rook rook && rook.Color != Color)
                 return true;
 
-            else
+            else // we found a different piece that wouldn't be attacking us
                 break;
         }
 
@@ -215,34 +201,34 @@ public class King : Piece
     private bool IsAttackedVerticallyByRookOrQueen()
     {
         // Check up
-        for (int i = File + 1; i <= 7; i++)
+        for (int i = CurrentRank + 1; i <= RANK_8; i++)
         {
-            if (Board.State[i, File] is null)
+            if (Board.State[i, CurrentFile] is null)
                 continue;
 
-            else if (Board.State[i, File] is Queen queen && queen.Color == oppositeColor)
+            else if (Board.State[i, CurrentFile] is Queen queen && queen.Color != Color)
                 return true;
 
-            else if (Board.State[i, File] is Rook rook && rook.Color == oppositeColor)
+            else if (Board.State[i, CurrentFile] is Rook rook && rook.Color != Color)
                 return true;
 
-            else
+            else // we found a different piece that wouldn't be attacking us
                 break;
         }
 
         // Check down
-        for (int i = File - 1; i >= 0; i--)
+        for (int i = CurrentRank - 1; i >= RANK_1; i--)
         {
-            if (Board.State[i, File] is null)
+            if (Board.State[i, CurrentFile] is null)
                 continue;
 
-            else if (Board.State[i, File] is Queen queen && queen.Color == oppositeColor)
+            else if (Board.State[i, CurrentFile] is Queen queen && queen.Color != Color)
                 return true;
 
-            else if (Board.State[i, File] is Rook rook && rook.Color == oppositeColor)
+            else if (Board.State[i, CurrentFile] is Rook rook && rook.Color != Color)
                 return true;
 
-            else
+            else // we found a different piece that wouldn't be attacking us
                 break;
         }
 
@@ -253,19 +239,9 @@ public class King : Piece
     {
         King otherKing = Color == PieceColor.White ? Board.BlackKing : Board.WhiteKing;
 
-        try
-        {
-            int otherKingRank = otherKing.Rank;
-            int otherKingFile = otherKing.File;
+        int otherKingRank = otherKing.CurrentRank;
+        int otherKingFile = otherKing.CurrentFile;
 
-            if (Math.Abs(Rank - otherKingRank) <= 1 && Math.Abs(File - otherKingFile) <= 1)
-                return true;
-            else
-                return false;
-        }
-        catch
-        {
-            return false;
-        }
+        return Math.Abs(CurrentRank - otherKingRank) <= 1 && Math.Abs(CurrentFile - otherKingFile) <= 1;
     }
 }

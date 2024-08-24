@@ -61,17 +61,17 @@ public class QueenTests
             {
                 bool canMoveToSquare = _queen.CanMove(i, j);
 
-                if (i == _queen.Rank && j == _queen.File)
+                if (i == _queen.CurrentRank && j == _queen.CurrentFile)
                 {
                     // Assert
                     canMoveToSquare.Should().BeFalse();
                 }
-                else if (i == _queen.Rank || j == _queen.File)
+                else if (i == _queen.CurrentRank || j == _queen.CurrentFile)
                 {
                     // Assert
                     canMoveToSquare.Should().BeTrue();
                 }
-                else if (Math.Abs(i - _queen.Rank) == Math.Abs(j - _queen.File))
+                else if (Math.Abs(i - _queen.CurrentRank) == Math.Abs(j - _queen.CurrentFile))
                 {
                     // Assert
                     canMoveToSquare.Should().BeTrue();

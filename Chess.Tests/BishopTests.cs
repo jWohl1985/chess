@@ -12,7 +12,6 @@ public class BishopTests
     public BishopTests()
     {
         _board = new GameBoard();
-
         _whiteBishop = new Bishop() { Board = _board, Color = PieceColor.White };
         _blackBishop = new Bishop() { Board = _board, Color = PieceColor.Black };
     }
@@ -24,10 +23,10 @@ public class BishopTests
         _board.State[3, 3] = _whiteBishop;
 
         // Act
-        bool canMoveTooFarUpRight = _whiteBishop.CanMove(_whiteBishop.Rank + 5, _whiteBishop.File + 5);
-        bool canMoveTooFarDownRight = _whiteBishop.CanMove(_whiteBishop.Rank - 4, _whiteBishop.File + 4);
-        bool canMoveTooFarDownLeft = _whiteBishop.CanMove(_whiteBishop.Rank - 4, _whiteBishop.File - 4);
-        bool canMoveTooFarUpLeft = _whiteBishop.CanMove(_whiteBishop.Rank + 5, _whiteBishop.File - 4);
+        bool canMoveTooFarUpRight = _whiteBishop.CanMove(_whiteBishop.CurrentRank + 5, _whiteBishop.CurrentFile + 5);
+        bool canMoveTooFarDownRight = _whiteBishop.CanMove(_whiteBishop.CurrentRank - 4, _whiteBishop.CurrentFile + 4);
+        bool canMoveTooFarDownLeft = _whiteBishop.CanMove(_whiteBishop.CurrentRank - 4, _whiteBishop.CurrentFile - 4);
+        bool canMoveTooFarUpLeft = _whiteBishop.CanMove(_whiteBishop.CurrentRank + 5, _whiteBishop.CurrentFile - 4);
 
         // Assert
         canMoveTooFarUpRight.Should().BeFalse();
@@ -49,7 +48,7 @@ public class BishopTests
             {
                 bool canMoveToSquare = _whiteBishop.CanMove(i, j);
 
-                if (Math.Abs(i - _whiteBishop.Rank) != Math.Abs(j - _whiteBishop.Rank))
+                if (Math.Abs(i - _whiteBishop.CurrentRank) != Math.Abs(j - _whiteBishop.CurrentRank))
                 {
                         // Assert
                         canMoveToSquare.Should().BeFalse();
@@ -57,7 +56,7 @@ public class BishopTests
                 else
                 {
                     // Assert
-                    if (i != _whiteBishop.Rank && j != _whiteBishop.File)
+                    if (i != _whiteBishop.CurrentRank && j != _whiteBishop.CurrentFile)
                     {
                         canMoveToSquare.Should().BeTrue();
                     }

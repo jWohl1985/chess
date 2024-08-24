@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\code\\Chess\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|c:\\code\\chess\\chess.logic\\gameboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|solutionrelative:chess.logic\\gameboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|c:\\code\\chess\\chess.logic\\pawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|solutionrelative:chess.logic\\pawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8DCE43A8-4CDB-453B-A73D-F410C9F14144}|Chess.Tests\\Chess.Tests.csproj|c:\\code\\chess\\chess.tests\\boardtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8DCE43A8-4CDB-453B-A73D-F410C9F14144}|Chess.Tests\\Chess.Tests.csproj|solutionrelative:chess.tests\\boardtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|c:\\code\\chess\\chess.logic\\knight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|solutionrelative:chess.logic\\knight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|c:\\code\\chess\\chess.logic\\king.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|solutionrelative:chess.logic\\king.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|c:\\code\\chess\\chess.logic\\queen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|solutionrelative:chess.logic\\queen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8DCE43A8-4CDB-453B-A73D-F410C9F14144}|Chess.Tests\\Chess.Tests.csproj|c:\\code\\chess\\chess.tests\\kingtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8DCE43A8-4CDB-453B-A73D-F410C9F14144}|Chess.Tests\\Chess.Tests.csproj|solutionrelative:chess.tests\\kingtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|c:\\code\\chess\\chess.logic\\bishop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|solutionrelative:chess.logic\\bishop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|c:\\code\\chess\\chess.logic\\rook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|solutionrelative:chess.logic\\rook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|c:\\code\\chess\\chess.logic\\piece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|solutionrelative:chess.logic\\piece.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,54 +42,80 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BoardTests.cs",
-              "DocumentMoniker": "C:\\code\\Chess\\Chess.Tests\\BoardTests.cs",
-              "RelativeDocumentMoniker": "Chess.Tests\\BoardTests.cs",
-              "ToolTip": "C:\\code\\Chess\\Chess.Tests\\BoardTests.cs",
-              "RelativeToolTip": "Chess.Tests\\BoardTests.cs",
-              "ViewState": "AQIAAOMAAAAAAAAAAAAQwAoBAAABAAAA",
+              "DocumentIndex": 5,
+              "Title": "Piece.cs",
+              "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Piece.cs",
+              "RelativeDocumentMoniker": "Chess.Logic\\Piece.cs",
+              "ToolTip": "C:\\code\\Chess\\Chess.Logic\\Piece.cs",
+              "RelativeToolTip": "Chess.Logic\\Piece.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFEAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-20T02:53:22.191Z",
+              "WhenOpened": "2024-08-24T06:22:19.719Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GameBoard.cs",
-              "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\GameBoard.cs",
-              "RelativeDocumentMoniker": "Chess.Logic\\GameBoard.cs",
-              "ToolTip": "C:\\code\\Chess\\Chess.Logic\\GameBoard.cs",
-              "RelativeToolTip": "Chess.Logic\\GameBoard.cs",
-              "ViewState": "AQIAAFUAAAAAAAAAAAAYwCAAAAAkAAAA",
+              "DocumentIndex": 4,
+              "Title": "Rook.cs",
+              "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Rook.cs",
+              "RelativeDocumentMoniker": "Chess.Logic\\Rook.cs",
+              "ToolTip": "C:\\code\\Chess\\Chess.Logic\\Rook.cs",
+              "RelativeToolTip": "Chess.Logic\\Rook.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-20T02:38:05.151Z",
+              "WhenOpened": "2024-08-24T06:20:15.661Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "KingTests.cs",
-              "DocumentMoniker": "C:\\code\\Chess\\Chess.Tests\\KingTests.cs",
-              "RelativeDocumentMoniker": "Chess.Tests\\KingTests.cs",
-              "ToolTip": "C:\\code\\Chess\\Chess.Tests\\KingTests.cs",
-              "RelativeToolTip": "Chess.Tests\\KingTests.cs",
-              "ViewState": "AQIAABgBAAAAAAAAAAAgwDgBAAAlAAAA",
+              "Title": "Bishop.cs",
+              "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Bishop.cs",
+              "RelativeDocumentMoniker": "Chess.Logic\\Bishop.cs",
+              "ToolTip": "C:\\code\\Chess\\Chess.Logic\\Bishop.cs",
+              "RelativeToolTip": "Chess.Logic\\Bishop.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-20T02:28:45.381Z",
+              "WhenOpened": "2024-08-24T06:18:08.473Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "King.cs",
-              "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\King.cs",
-              "RelativeDocumentMoniker": "Chess.Logic\\King.cs",
-              "ToolTip": "C:\\code\\Chess\\Chess.Logic\\King.cs",
-              "RelativeToolTip": "Chess.Logic\\King.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0BAAAFAAAA",
+              "Title": "Queen.cs",
+              "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Queen.cs",
+              "RelativeDocumentMoniker": "Chess.Logic\\Queen.cs",
+              "ToolTip": "C:\\code\\Chess\\Chess.Logic\\Queen.cs",
+              "RelativeToolTip": "Chess.Logic\\Queen.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-17T18:53:15.213Z",
+              "WhenOpened": "2024-08-24T06:13:38.116Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Pawn.cs",
+              "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Pawn.cs",
+              "RelativeDocumentMoniker": "Chess.Logic\\Pawn.cs",
+              "ToolTip": "C:\\code\\Chess\\Chess.Logic\\Pawn.cs",
+              "RelativeToolTip": "Chess.Logic\\Pawn.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T06:04:19.635Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Knight.cs",
+              "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Knight.cs",
+              "RelativeDocumentMoniker": "Chess.Logic\\Knight.cs",
+              "ToolTip": "C:\\code\\Chess\\Chess.Logic\\Knight.cs",
+              "RelativeToolTip": "Chess.Logic\\Knight.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T06:03:52.087Z",
               "EditorCaption": ""
             }
           ]
