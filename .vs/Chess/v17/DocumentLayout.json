@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\code\\Chess\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{8DCE43A8-4CDB-453B-A73D-F410C9F14144}|Chess.Tests\\Chess.Tests.csproj|c:\\code\\chess\\chess.tests\\boardtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DCE43A8-4CDB-453B-A73D-F410C9F14144}|Chess.Tests\\Chess.Tests.csproj|solutionrelative:chess.tests\\boardtests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8DCE43A8-4CDB-453B-A73D-F410C9F14144}|Chess.Tests\\Chess.Tests.csproj|c:\\code\\chess\\chess.tests\\bishoptests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8DCE43A8-4CDB-453B-A73D-F410C9F14144}|Chess.Tests\\Chess.Tests.csproj|solutionrelative:chess.tests\\bishoptests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,7 +19,7 @@
       "RelativeMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|solutionrelative:chess.logic\\bishop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|c:\\code\\chess\\chess.logic\\pawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|C:\\code\\Chess\\chess.logic\\pawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{560822DE-54D3-40AB-84DB-F18CBC6056F5}|Chess.Logic\\Chess.Logic.csproj|solutionrelative:chess.logic\\pawn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -47,19 +51,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "BoardTests.cs",
+              "DocumentMoniker": "C:\\code\\Chess\\Chess.Tests\\BoardTests.cs",
+              "RelativeDocumentMoniker": "Chess.Tests\\BoardTests.cs",
+              "ToolTip": "C:\\code\\Chess\\Chess.Tests\\BoardTests.cs",
+              "RelativeToolTip": "Chess.Tests\\BoardTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-24T20:27:04.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "BishopTests.cs",
               "DocumentMoniker": "C:\\code\\Chess\\Chess.Tests\\BishopTests.cs",
               "RelativeDocumentMoniker": "Chess.Tests\\BishopTests.cs",
               "ToolTip": "C:\\code\\Chess\\Chess.Tests\\BishopTests.cs",
               "RelativeToolTip": "Chess.Tests\\BishopTests.cs",
-              "ViewState": "AQIAAIoAAAAAAAAAAAAswKwAAAAwAAAA",
+              "ViewState": "AQIAAIQAAAAAAAAAAAAswJ4AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-24T15:53:41.57Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Piece.cs",
               "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Piece.cs",
               "RelativeDocumentMoniker": "Chess.Logic\\Piece.cs",
@@ -67,12 +84,11 @@
               "RelativeToolTip": "Chess.Logic\\Piece.cs",
               "ViewState": "AQIAAC4AAAAAAAAAAAAAAFEAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T06:22:19.719Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-24T06:22:19.719Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Rook.cs",
               "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Rook.cs",
               "RelativeDocumentMoniker": "Chess.Logic\\Rook.cs",
@@ -84,7 +100,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Bishop.cs",
               "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Bishop.cs",
               "RelativeDocumentMoniker": "Chess.Logic\\Bishop.cs",
@@ -92,12 +108,11 @@
               "RelativeToolTip": "Chess.Logic\\Bishop.cs",
               "ViewState": "AQIAAAcAAAAAAAAAAAAgwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T06:18:08.473Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-24T06:18:08.473Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Queen.cs",
               "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Queen.cs",
               "RelativeDocumentMoniker": "Chess.Logic\\Queen.cs",
@@ -109,7 +124,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Pawn.cs",
               "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Pawn.cs",
               "RelativeDocumentMoniker": "Chess.Logic\\Pawn.cs",
@@ -117,12 +132,11 @@
               "RelativeToolTip": "Chess.Logic\\Pawn.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-24T06:04:19.635Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-24T06:04:19.635Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Knight.cs",
               "DocumentMoniker": "C:\\code\\Chess\\Chess.Logic\\Knight.cs",
               "RelativeDocumentMoniker": "Chess.Logic\\Knight.cs",

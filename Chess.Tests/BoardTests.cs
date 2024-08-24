@@ -1,11 +1,41 @@
 using Chess.Logic;
-using static Chess.Logic.GameBoard;
 using FluentAssertions;
+using static Chess.Logic.GameBoard;
 
 namespace Chess.Tests;
 
 public class BoardTests
 {
+    [Fact]
+    public void Board_Constants_Should_Be_Correct_Values()
+    {
+        // Arrange
+
+        // Act
+
+        // Assert
+        BOARD_WIDTH.Should().Be(8);
+        BOARD_HEIGHT.Should().Be(8);
+
+        RANK_1.Should().Be(0);
+        RANK_2.Should().Be(1);
+        RANK_3.Should().Be(2);
+        RANK_4.Should().Be(3);
+        RANK_5.Should().Be(4);
+        RANK_6.Should().Be(5);
+        RANK_7.Should().Be(6);
+        RANK_8.Should().Be(7);
+
+        FILE_A.Should().Be(0);
+        FILE_B.Should().Be(1);
+        FILE_C.Should().Be(2);
+        FILE_D.Should().Be(3);
+        FILE_E.Should().Be(4);
+        FILE_F.Should().Be(5);
+        FILE_G.Should().Be(6);
+        FILE_H.Should().Be(7);
+    }
+
     [Fact]
     public void Board_Should_Be_Correct_Size()
     {
@@ -31,25 +61,23 @@ public class BoardTests
 
         // Assert
 
-        for (int i = 0; i <= 7; i++)
+        for (int i = FILE_A; i <= FILE_H; i++)
         {
-            Pawn? pawn = board.State[1, i] as Pawn;
+            Pawn? pawn = board.State[RANK_2, i] as Pawn;
 
-            if (pawn is null) 
-                Assert.Fail();
-            pawn.Color.Should().Be(PieceColor.White);
-            pawn.CurrentRank.Should().Be(1);
+            pawn.Should().NotBeNull();
+            pawn!.Color.Should().Be(PieceColor.White);
+            pawn.CurrentRank.Should().Be(RANK_2);
             pawn.CurrentFile.Should().Be(i);
         }
 
-        for (int i = 0; i <= 7; i++)
+        for (int i = FILE_A; i <= FILE_H; i++)
         {
-            Pawn? pawn = board.State[6, i] as Pawn;
+            Pawn? pawn = board.State[RANK_7, i] as Pawn;
 
-            if (pawn is null)
-                Assert.Fail();
-            pawn.Color.Should().Be(PieceColor.Black);
-            pawn.CurrentRank.Should().Be(6);
+            pawn.Should().NotBeNull();
+            pawn!.Color.Should().Be(PieceColor.Black);
+            pawn.CurrentRank.Should().Be(RANK_7);
             pawn.CurrentFile.Should().Be(i);
         }
     }
@@ -63,11 +91,11 @@ public class BoardTests
         // Act
         board.SetupGame();
 
-        Rook? whiteRook1 = board.State[0, 0] as Rook;
-        Rook? whiteRook2 = board.State[0, 7] as Rook;
+        Rook? whiteRook1 = board.State[RANK_1, FILE_A] as Rook;
+        Rook? whiteRook2 = board.State[RANK_1, FILE_H] as Rook;
 
-        Rook? blackRook1 = board.State[7, 0] as Rook;
-        Rook? blackRook2 = board.State[7, 7] as Rook;
+        Rook? blackRook1 = board.State[RANK_8, FILE_A] as Rook;
+        Rook? blackRook2 = board.State[RANK_8, FILE_H] as Rook;
 
         // Assert
         whiteRook1.Should().NotBeNull();
@@ -80,15 +108,15 @@ public class BoardTests
         blackRook1!.Color.Should().Be(PieceColor.Black);
         blackRook2!.Color.Should().Be(PieceColor.Black);
 
-        whiteRook1.CurrentRank.Should().Be(0);
-        whiteRook2.CurrentRank.Should().Be(0);
-        blackRook1.CurrentRank.Should().Be(7);
-        blackRook2.CurrentRank.Should().Be(7);
+        whiteRook1.CurrentRank.Should().Be(RANK_1);
+        whiteRook2.CurrentRank.Should().Be(RANK_1);
+        blackRook1.CurrentRank.Should().Be(RANK_8);
+        blackRook2.CurrentRank.Should().Be(RANK_8);
 
-        whiteRook1.CurrentFile.Should().Be(0);
-        whiteRook2.CurrentFile.Should().Be(7);
-        blackRook1.CurrentFile.Should().Be(0);
-        blackRook2.CurrentFile.Should().Be(7);
+        whiteRook1.CurrentFile.Should().Be(FILE_A);
+        whiteRook2.CurrentFile.Should().Be(FILE_H);
+        blackRook1.CurrentFile.Should().Be(FILE_A);
+        blackRook2.CurrentFile.Should().Be(FILE_H);
     }
 
     [Fact]
@@ -100,11 +128,11 @@ public class BoardTests
         // Act
         board.SetupGame();
 
-        Knight? whiteKnight1 = board.State[0, 1] as Knight;
-        Knight? whiteKnight2 = board.State[0, 6] as Knight;
+        Knight? whiteKnight1 = board.State[RANK_1, FILE_B] as Knight;
+        Knight? whiteKnight2 = board.State[RANK_1, FILE_G] as Knight;
 
-        Knight? blackKnight1 = board.State[7, 1] as Knight;
-        Knight? blackKnight2 = board.State[7, 6] as Knight;
+        Knight? blackKnight1 = board.State[RANK_8, FILE_B] as Knight;
+        Knight? blackKnight2 = board.State[RANK_8, FILE_G] as Knight;
 
         // Assert
         whiteKnight1.Should().NotBeNull();
@@ -117,15 +145,15 @@ public class BoardTests
         blackKnight1!.Color.Should().Be(PieceColor.Black);
         blackKnight2!.Color.Should().Be(PieceColor.Black);
 
-        whiteKnight1.CurrentRank.Should().Be(0);
-        whiteKnight2.CurrentRank.Should().Be(0);
-        blackKnight1.CurrentRank.Should().Be(7);
-        blackKnight2.CurrentRank.Should().Be(7);
+        whiteKnight1.CurrentRank.Should().Be(RANK_1);
+        whiteKnight2.CurrentRank.Should().Be(RANK_1);
+        blackKnight1.CurrentRank.Should().Be(RANK_8);
+        blackKnight2.CurrentRank.Should().Be(RANK_8);
 
-        whiteKnight1.CurrentFile.Should().Be(1);
-        whiteKnight2.CurrentFile.Should().Be(6);
-        blackKnight1.CurrentFile.Should().Be(1);
-        blackKnight2.CurrentFile.Should().Be(6);
+        whiteKnight1.CurrentFile.Should().Be(FILE_B);
+        whiteKnight2.CurrentFile.Should().Be(FILE_G);
+        blackKnight1.CurrentFile.Should().Be(FILE_B);
+        blackKnight2.CurrentFile.Should().Be(FILE_G);
     }
 
     [Fact]
@@ -137,11 +165,11 @@ public class BoardTests
         // Act
         board.SetupGame();
 
-        Bishop? whiteBishop1 = board.State[0, 2] as Bishop;
-        Bishop? whiteBishop2 = board.State[0, 5] as Bishop;
+        Bishop? whiteBishop1 = board.State[RANK_1, FILE_C] as Bishop;
+        Bishop? whiteBishop2 = board.State[RANK_1, FILE_F] as Bishop;
 
-        Bishop? blackBishop1 = board.State[7, 2] as Bishop;
-        Bishop? blackBishop2 = board.State[7, 5] as Bishop;
+        Bishop? blackBishop1 = board.State[RANK_8, FILE_C] as Bishop;
+        Bishop? blackBishop2 = board.State[RANK_8, FILE_F] as Bishop;
 
         // Assert
         whiteBishop1.Should().NotBeNull();
@@ -154,15 +182,15 @@ public class BoardTests
         blackBishop1!.Color.Should().Be(PieceColor.Black);
         blackBishop2!.Color.Should().Be(PieceColor.Black);
 
-        whiteBishop1.CurrentRank.Should().Be(0);
-        whiteBishop2.CurrentRank.Should().Be(0);
-        blackBishop1.CurrentRank.Should().Be(7);
-        blackBishop2.CurrentRank.Should().Be(7);
+        whiteBishop1.CurrentRank.Should().Be(RANK_1);
+        whiteBishop2.CurrentRank.Should().Be(RANK_1);
+        blackBishop1.CurrentRank.Should().Be(RANK_8);
+        blackBishop2.CurrentRank.Should().Be(RANK_8);
 
-        whiteBishop1.CurrentFile.Should().Be(2);
-        whiteBishop2.CurrentFile.Should().Be(5);
-        blackBishop1.CurrentFile.Should().Be(2);
-        blackBishop2.CurrentFile.Should().Be(5);
+        whiteBishop1.CurrentFile.Should().Be(FILE_C);
+        whiteBishop2.CurrentFile.Should().Be(FILE_F);
+        blackBishop1.CurrentFile.Should().Be(FILE_C);
+        blackBishop2.CurrentFile.Should().Be(FILE_F);
     }
 
     [Fact]
@@ -174,8 +202,8 @@ public class BoardTests
         // Act
         board.SetupGame();
 
-        Queen? whiteQueen = board.State[0, 3] as Queen;
-        Queen? blackQueen = board.State[7, 3] as Queen;
+        Queen? whiteQueen = board.State[RANK_1, FILE_D] as Queen;
+        Queen? blackQueen = board.State[RANK_8, FILE_D] as Queen;
 
         // Assert
         whiteQueen.Should().NotBeNull();
@@ -184,11 +212,11 @@ public class BoardTests
         whiteQueen!.Color.Should().Be(PieceColor.White);
         blackQueen!.Color.Should().Be(PieceColor.Black);
 
-        whiteQueen.CurrentRank.Should().Be(0);
-        blackQueen.CurrentRank.Should().Be(7);
+        whiteQueen.CurrentRank.Should().Be(RANK_1);
+        blackQueen.CurrentRank.Should().Be(RANK_8);
 
-        whiteQueen.CurrentFile.Should().Be(3);
-        blackQueen.CurrentFile.Should().Be(3);
+        whiteQueen.CurrentFile.Should().Be(FILE_D);
+        blackQueen.CurrentFile.Should().Be(FILE_D);
     }
 
     [Fact]
@@ -210,11 +238,11 @@ public class BoardTests
         whiteKing!.Color.Should().Be(PieceColor.White);
         blackKing!.Color.Should().Be(PieceColor.Black);
 
-        whiteKing.CurrentRank.Should().Be(0);
-        blackKing.CurrentRank.Should().Be(7);
+        whiteKing.CurrentRank.Should().Be(RANK_1);
+        blackKing.CurrentRank.Should().Be(RANK_8);
 
-        whiteKing.CurrentFile.Should().Be(4);
-        blackKing.CurrentFile.Should().Be(4);
+        whiteKing.CurrentFile.Should().Be(FILE_E);
+        blackKing.CurrentFile.Should().Be(FILE_E);
     }
 
     [Fact]
@@ -240,9 +268,9 @@ public class BoardTests
         board.SetupGame();
 
         // Assert
-        for(int i = 2; i <=5; i++)
+        for(int i = RANK_3; i <= RANK_6; i++)
         {
-            for (int j = 0; j <= 7; j++)
+            for (int j = FILE_A; j <= FILE_H; j++)
             {
                 board.State[i, j].Should().BeNull();
             }
@@ -260,9 +288,12 @@ public class BoardTests
         board.ClearBoard();
 
         // Assert
-        foreach (Piece? piece in board.State)
+        for(int i = RANK_1; i <= RANK_8; i++)
         {
-            piece.Should().BeNull();
+            for(int j = FILE_A; j <= FILE_H; j++)
+            {
+                board.State[i, j].Should().BeNull();
+            }
         }
     }
 }
