@@ -1,5 +1,6 @@
 ﻿using Chess.Logic;
 using FluentAssertions;
+using static Chess.Logic.GameBoard;
 
 namespace Chess.Tests;
 
@@ -20,12 +21,12 @@ public class PawnTests
     public void Has_Moved_Should_Only_Be_True_When_Pawn_Is_Not_On_Starting_Rank()
     {
         // Arrange
-        _board.State[1, 2] = _whitePawn;
-        _board.State[6, 3] = _blackPawn;
-        Pawn movedWhitePawn = new Pawn() { Board = _board, Color = PieceColor.White };
-        Pawn movedBlackPawn = new Pawn() { Board = _board, Color = PieceColor.Black };
-        _board.State[3, 5] = movedWhitePawn;
-        _board.State[5, 7] = movedBlackPawn;
+        _board.State[RANK_2, FILE_C] = _whitePawn;
+        _board.State[RANK_7, FILE_D] = _blackPawn;
+        Pawn movedWhitePawn = new() { Board = _board, Color = PieceColor.White };
+        Pawn movedBlackPawn = new() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_4, FILE_F] = movedWhitePawn;
+        _board.State[RANK_6, FILE_G] = movedBlackPawn;
 
         // Act
 
@@ -40,12 +41,12 @@ public class PawnTests
     public void Should_Not_Be_Able_To_Move_Off_Board()
     {
         // Arrange
-        _board.State[7, 3] = _whitePawn;
-        _board.State[0, 1] = _blackPawn;
+        _board.State[RANK_8, FILE_D] = _whitePawn;
+        _board.State[RANK_1, FILE_B] = _blackPawn;
 
         // Act
-        bool canMoveTooFarUp = _whitePawn.CanMove(8, 3);
-        bool canMoveTooFarDown = _whitePawn.CanMove(-1, 1);
+        bool canMoveTooFarUp = _whitePawn.CanMove(8, FILE_D);
+        bool canMoveTooFarDown = _whitePawn.CanMove(-1, FILE_B);
 
         // Assert
         canMoveTooFarDown.Should().BeFalse();
@@ -56,30 +57,17 @@ public class PawnTests
     public void Should_Only_Move_One_Square_Forward_After_Moving()
     {
         // Arrange
-        _board.State[3, 3] = _whitePawn;
-        _board.State[5, 1] = _blackPawn;
+        _board.State[RANK_4, FILE_D] = _whitePawn;
+        _board.State[RANK_6, FILE_B] = _blackPawn;
 
         // Act
-        for (int i = 0; i <= 7; i++)
+        for (int i = RANK_1; i <= RANK_8; i++)
         {
-            for (int j = 0; j <= 7; j++)
+            for (int j = FILE_A; j <= FILE_H; j++)
             {
-                bool whitePawnCanMove = _whitePawn.CanMove(i, j);
-                bool blackPawnCanMove = _blackPawn.CanMove(i, j);
-
-                if (i == _whitePawn.CurrentRank && j == _whitePawn.CurrentFile)
-                    whitePawnCanMove.Should().BeFalse();
-                else if (i == _whitePawn.CurrentRank + 1 && j == _whitePawn.CurrentFile)
-                    whitePawnCanMove.Should().BeTrue();
-                else
-                    whitePawnCanMove.Should().BeFalse();
-
-                if (i == _blackPawn.CurrentRank && j == _blackPawn.CurrentFile)
-                    blackPawnCanMove.Should().BeFalse();
-                else if (i == _blackPawn.CurrentRank - 1 && j == _blackPawn.CurrentFile)
-                    blackPawnCanMove.Should().BeTrue();
-                else
-                    blackPawnCanMove.Should().BeFalse();
+                // Assert
+                _whitePawn.CanMove(i, j).Should().Be(i == _whitePawn.CurrentRank + 1 && j == _whitePawn.CurrentFile);
+                _blackPawn.CanMove(i, j).Should().Be(i == _blackPawn.CurrentRank - 1 && j == _blackPawn.CurrentFile);
             }
         }
     }
@@ -88,12 +76,12 @@ public class PawnTests
     public void Should_Not_Move_To_The_Same_Square()
     {
         // Arrange
-        _board.State[3, 3] = _whitePawn;
-        _board.State[4, 4] = _blackPawn;
+        _board.State[RANK_4, FILE_D] = _whitePawn;
+        _board.State[RANK_5, FILE_E] = _blackPawn;
 
         // Act
-        bool whitePawnCanMoveToSameSquare = _whitePawn.CanMove(3, 3);
-        bool blackPawnCanMoveToSameSquare = _blackPawn.CanMove(4, 4);
+        bool whitePawnCanMoveToSameSquare = _whitePawn.CanMove(RANK_4, FILE_D);
+        bool blackPawnCanMoveToSameSquare = _blackPawn.CanMove(RANK_5, FILE_E);
 
         // Assert
         whitePawnCanMoveToSameSquare.Should().BeFalse();
@@ -104,15 +92,15 @@ public class PawnTests
     public void Should_Not_Move_Onto_Friendly_Pieces()
     {
         // Arrange
-        _board.State[3, 3] = _whitePawn;
-        _board.State[4, 3] = new Queen() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_4, FILE_D] = _whitePawn;
+        _board.State[RANK_5, FILE_D] = new Queen() { Board = _board, Color = PieceColor.White };
 
-        _board.State[5, 5] = _blackPawn;
-        _board.State[4, 5] = new Queen() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_6, FILE_F] = _blackPawn;
+        _board.State[RANK_5, FILE_F] = new Queen() { Board = _board, Color = PieceColor.Black };
 
         // Act
-        bool whitePawnCanMoveOntoOwnPiece = _whitePawn.CanMove(4, 3);
-        bool blackPawnCanMoveOntoOwnPiece = _blackPawn.CanMove(4, 5);
+        bool whitePawnCanMoveOntoOwnPiece = _whitePawn.CanMove(RANK_5, FILE_D);
+        bool blackPawnCanMoveOntoOwnPiece = _blackPawn.CanMove(RANK_5, FILE_F);
 
         // Assert
         whitePawnCanMoveOntoOwnPiece.Should().BeFalse();
@@ -123,12 +111,12 @@ public class PawnTests
     public void Should_Be_Able_To_Move_Two_Squares_On_First_Move()
     {
         // Arrange
-        _board.State[1, 3] = _whitePawn;
-        _board.State[6, 5] = _blackPawn;
+        _board.State[RANK_2, FILE_D] = _whitePawn;
+        _board.State[RANK_7, FILE_F] = _blackPawn;
 
         // Act
-        bool whiteCanMoveTwoSquares = _whitePawn.CanMove(3, 3);
-        bool blackCanMoveTwoSquares = _blackPawn.CanMove(4, 5);
+        bool whiteCanMoveTwoSquares = _whitePawn.CanMove(RANK_4, FILE_D);
+        bool blackCanMoveTwoSquares = _blackPawn.CanMove(RANK_5, FILE_F);
 
         // Assert
         whiteCanMoveTwoSquares.Should().BeTrue();
@@ -139,15 +127,15 @@ public class PawnTests
     public void Should_Not_Move_Through_Friendly_Pieces()
     {
         // Arrange
-        _board.State[1, 3] = _whitePawn;
-        _board.State[2, 3] = new Knight() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_2, FILE_D] = _whitePawn;
+        _board.State[RANK_3, FILE_D] = new Knight() { Board = _board, Color = PieceColor.White };
 
-        _board.State[6, 5] = _blackPawn;
-        _board.State[5, 5] = new Bishop() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_7, FILE_F] = _blackPawn;
+        _board.State[RANK_6, FILE_F] = new Bishop() { Board = _board, Color = PieceColor.Black };
 
         // Act
-        bool whiteCanMoveThroughOwnPiece = _whitePawn.CanMove(3, 3);
-        bool blackCanMoveThroughOwnPiece = _blackPawn.CanMove(4, 5);
+        bool whiteCanMoveThroughOwnPiece = _whitePawn.CanMove(RANK_4, FILE_D);
+        bool blackCanMoveThroughOwnPiece = _blackPawn.CanMove(RANK_5, FILE_F);
 
         // Assert
         whiteCanMoveThroughOwnPiece.Should().BeFalse();
@@ -158,15 +146,15 @@ public class PawnTests
     public void Should_Not_Move_Through_Enemy_Pieces()
     {
         // Arrange
-        _board.State[1, 3] = _whitePawn;
-        _board.State[2, 3] = new Knight() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_2, FILE_D] = _whitePawn;
+        _board.State[RANK_3, FILE_D] = new Knight() { Board = _board, Color = PieceColor.Black };
 
-        _board.State[6, 5] = _blackPawn;
-        _board.State[5, 5] = new Bishop() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_7, FILE_F] = _blackPawn;
+        _board.State[RANK_6, FILE_F] = new Bishop() { Board = _board, Color = PieceColor.White };
 
         // Act
-        bool whiteCanMoveThroughOwnPiece = _whitePawn.CanMove(3, 3);
-        bool blackCanMoveThroughOwnPiece = _blackPawn.CanMove(4, 5);
+        bool whiteCanMoveThroughOwnPiece = _whitePawn.CanMove(RANK_4, FILE_D);
+        bool blackCanMoveThroughOwnPiece = _blackPawn.CanMove(RANK_5, FILE_F);
 
         // Assert
         whiteCanMoveThroughOwnPiece.Should().BeFalse();
@@ -177,20 +165,19 @@ public class PawnTests
     public void Should_Capture_Enemy_Pieces()
     {
         // Arrange
-        _board.State[3, 1] = _whitePawn;
-        _board.State[4, 0] = new Knight() { Board = _board, Color = PieceColor.Black };
-        _board.State[4, 2] = new Bishop() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_4, FILE_B] = _whitePawn;
+        _board.State[RANK_5, FILE_A] = new Knight() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_5, FILE_C] = new Bishop() { Board = _board, Color = PieceColor.Black };
 
-        _board.State[5, 5] = _blackPawn;
-        _board.State[4, 4] = new Knight() { Board = _board, Color = PieceColor.White };
-        _board.State[4, 6] = new Bishop() { Board = _board, Color = PieceColor.White };
-
+        _board.State[RANK_6, FILE_F] = _blackPawn;
+        _board.State[RANK_5, FILE_E] = new Knight() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_5, FILE_G] = new Bishop() { Board = _board, Color = PieceColor.White };
 
         // Assert
-        bool whiteCanCaptureLeft = _whitePawn.CanMove(4, 0);
-        bool whiteCanCaptureRight = _whitePawn.CanMove(4, 2);
-        bool blackCanCaptureLeft = _blackPawn.CanMove(4, 4);
-        bool blackCanCaptureRight = _blackPawn.CanMove(4, 6);
+        bool whiteCanCaptureLeft = _whitePawn.CanMove(RANK_5, FILE_A);
+        bool whiteCanCaptureRight = _whitePawn.CanMove(RANK_5, FILE_C);
+        bool blackCanCaptureLeft = _blackPawn.CanMove(RANK_5, FILE_E);
+        bool blackCanCaptureRight = _blackPawn.CanMove(RANK_5, FILE_G);
 
         // Assert
         whiteCanCaptureLeft.Should().BeTrue();
@@ -203,20 +190,20 @@ public class PawnTests
     public void Should_Not_Capture_Own_Pieces()
     {
         // Arrange
-        _board.State[3, 1] = _whitePawn;
-        _board.State[4, 0] = new Knight() { Board = _board, Color = PieceColor.White };
-        _board.State[4, 2] = new Bishop() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_4, FILE_B] = _whitePawn;
+        _board.State[RANK_5, FILE_A] = new Knight() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_5, FILE_C] = new Bishop() { Board = _board, Color = PieceColor.White };
 
-        _board.State[5, 5] = _blackPawn;
-        _board.State[4, 4] = new Knight() { Board = _board, Color = PieceColor.Black };
-        _board.State[4, 6] = new Bishop() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_6, FILE_F] = _blackPawn;
+        _board.State[RANK_5, FILE_E] = new Knight() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_5, FILE_G] = new Bishop() { Board = _board, Color = PieceColor.Black };
 
 
         // Assert
-        bool whiteCanCaptureLeft = _whitePawn.CanMove(4, 0);
-        bool whiteCanCaptureRight = _whitePawn.CanMove(4, 2);
-        bool blackCanCaptureLeft = _blackPawn.CanMove(4, 4);
-        bool blackCanCaptureRight = _blackPawn.CanMove(4, 6);
+        bool whiteCanCaptureLeft = _whitePawn.CanMove(RANK_5, FILE_A);
+        bool whiteCanCaptureRight = _whitePawn.CanMove(RANK_5, FILE_C);
+        bool blackCanCaptureLeft = _blackPawn.CanMove(RANK_5, FILE_E);
+        bool blackCanCaptureRight = _blackPawn.CanMove(RANK_5, FILE_G);
 
         // Assert
         whiteCanCaptureLeft.Should().BeFalse();
@@ -229,16 +216,16 @@ public class PawnTests
     public void Should_Not_Capture_Forward_One_Square()
     {
         // Arrange
-        _board.State[1, 1] = _whitePawn;
-        _board.State[2, 1] = new Knight() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_2, FILE_B] = _whitePawn;
+        _board.State[RANK_3, FILE_B] = new Knight() { Board = _board, Color = PieceColor.Black };
 
-        _board.State[6, 5] = _blackPawn;
-        _board.State[5, 5] = new Knight() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_7, FILE_F] = _blackPawn;
+        _board.State[RANK_6, FILE_F] = new Knight() { Board = _board, Color = PieceColor.White };
 
 
         // Assert
-        bool whiteCanCaptureForward = _whitePawn.CanMove(2, 1);
-        bool blackCanCaptureForward = _blackPawn.CanMove(5, 5);
+        bool whiteCanCaptureForward = _whitePawn.CanMove(RANK_3, FILE_B);
+        bool blackCanCaptureForward = _blackPawn.CanMove(RANK_6, FILE_F);
 
         // Assert
         whiteCanCaptureForward.Should().BeFalse();
@@ -249,16 +236,16 @@ public class PawnTests
     public void Should_Not_Capture_Forward_Two_Squares()
     {
         // Arrange
-        _board.State[1, 1] = _whitePawn;
-        _board.State[3, 1] = new Knight() { Board = _board, Color = PieceColor.Black };
+        _board.State[RANK_2, FILE_B] = _whitePawn;
+        _board.State[RANK_4, FILE_B] = new Knight() { Board = _board, Color = PieceColor.Black };
 
-        _board.State[6, 5] = _blackPawn;
-        _board.State[4, 5] = new Knight() { Board = _board, Color = PieceColor.White };
+        _board.State[RANK_7, FILE_F] = _blackPawn;
+        _board.State[RANK_5, FILE_F] = new Knight() { Board = _board, Color = PieceColor.White };
 
 
         // Assert
-        bool whiteCanCaptureForward = _whitePawn.CanMove(3, 1);
-        bool blackCanCaptureForward = _blackPawn.CanMove(4, 5);
+        bool whiteCanCaptureForward = _whitePawn.CanMove(RANK_4, FILE_B);
+        bool blackCanCaptureForward = _blackPawn.CanMove(RANK_5, FILE_F);
 
         // Assert
         whiteCanCaptureForward.Should().BeFalse();
