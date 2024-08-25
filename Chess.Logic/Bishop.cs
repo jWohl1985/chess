@@ -38,7 +38,7 @@ public class Bishop : Piece
         {
             for (int i = CurrentRank + 1; i < newRank; i++)
             {
-                for (int j = CurrentFile - 1; j > CurrentFile; j--)
+                for (int j = CurrentFile - 1; j > newFile; j--)
                 {
                     if (Board.State[i, j] is not null)
                         return true;
